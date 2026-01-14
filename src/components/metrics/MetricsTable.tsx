@@ -2,7 +2,7 @@ import { Grid, Icon, Row, Text } from '@umami/react-zen';
 import { useEffect, useMemo } from 'react';
 import { LinkButton } from '@/components/common/LinkButton';
 import { LoadingPanel } from '@/components/common/LoadingPanel';
-import { useMessages, useNavigation, useWebsiteMetricsQuery } from '@/components/hooks';
+import { useMessages, useMobile, useNavigation, useWebsiteMetricsQuery } from '@/components/hooks';
 import { Maximize } from '@/components/icons';
 import { MetricLabel } from '@/components/metrics/MetricLabel';
 import { percentFilter } from '@/lib/filters';
@@ -32,6 +32,7 @@ export function MetricsTable({
 }: MetricsTableProps) {
   const { updateParams } = useNavigation();
   const { formatMessage, labels } = useMessages();
+  const { isPhone } = useMobile();
   const { data, isLoading, isFetching, error } = useWebsiteMetricsQuery(websiteId, {
     type,
     limit,
@@ -81,7 +82,14 @@ export function MetricsTable({
         {data && <ListTable {...props} data={filteredData} renderLabel={renderLabel} />}
         {showMore && limit && (
           <Row justifyContent="center" alignItems="flex-end">
-            <LinkButton href={updateParams({ view: type })} variant="quiet">
+            <LinkButton
+              href={updateParams({ view: type })}
+              variant="quiet"
+              style={{
+                minHeight: isPhone ? '44px' : 'auto',
+                padding: isPhone ? '8px 16px' : undefined,
+              }}
+            >
               <Icon size="sm">
                 <Maximize />
               </Icon>

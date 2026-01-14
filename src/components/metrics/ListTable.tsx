@@ -68,11 +68,18 @@ export function ListTable({
 
   return (
     <Column gap>
-      <Grid alignItems="center" justifyContent="space-between" paddingLeft="2" columns="1fr 100px">
+      <Grid
+        alignItems="center"
+        justifyContent="space-between"
+        paddingLeft="2"
+        columns={isPhone ? '1fr' : '1fr 100px'}
+      >
         <Text weight="bold">{title}</Text>
-        <Text weight="bold" align="center">
-          {metric}
-        </Text>
+        {!isPhone && (
+          <Text weight="bold" align="center">
+            {metric}
+          </Text>
+        )}
       </Grid>
       <Column gap="1">
         {data?.length === 0 && <Empty />}
@@ -110,6 +117,45 @@ const AnimatedRow = ({
     config: animate ? config.default : { duration: 0 },
   });
 
+  if (isPhone) {
+    // Mobile vertical stack layout
+    return (
+      <Column paddingX="2" paddingY="2" hoverBackgroundColor="2" borderRadius gap="1">
+        <Row alignItems="center">
+          <Text truncate={true} style={{ maxWidth: '300px' }}>
+            {label}
+          </Text>
+        </Row>
+        <Row alignItems="center" justifyContent="space-between">
+          <Row alignItems="center" gap="2">
+            {change}
+            <Text weight="bold">
+              <AnimatedDiv title={props?.y as any}>
+                {currency
+                  ? props.y?.to(n => formatLongCurrency(n, currency))
+                  : props.y?.to(formatLongNumber)}
+              </AnimatedDiv>
+            </Text>
+          </Row>
+          {showPercentage && (
+            <Text
+              color="muted"
+              style={{
+                backgroundColor: 'var(--base-color-3)',
+                padding: '2px 8px',
+                borderRadius: '12px',
+                fontSize: '0.875rem',
+              }}
+            >
+              <AnimatedDiv>{props.width.to(n => `${n?.toFixed?.(0)}%`)}</AnimatedDiv>
+            </Text>
+          )}
+        </Row>
+      </Column>
+    );
+  }
+
+  // Desktop grid layout
   return (
     <Grid
       columns="1fr 50px 50px"
@@ -120,7 +166,7 @@ const AnimatedRow = ({
       gap
     >
       <Row alignItems="center">
-        <Text truncate={true} style={{ maxWidth: isPhone ? '200px' : '400px' }}>
+        <Text truncate={true} style={{ maxWidth: '400px' }}>
           {label}
         </Text>
       </Row>

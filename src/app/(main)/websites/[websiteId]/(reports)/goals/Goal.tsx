@@ -51,7 +51,6 @@ export function Goal({ id, name, type, parameters, websiteId, startDate, endDate
                   return (
                     <Dialog
                       title={formatMessage(labels.goal)}
-                      variant="modal"
                       style={{ minHeight: 300, minWidth: 400 }}
                     >
                       <GoalEditForm id={id} websiteId={websiteId} onClose={close} />

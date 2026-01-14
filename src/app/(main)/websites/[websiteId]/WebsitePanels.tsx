@@ -21,7 +21,7 @@ export function WebsitePanels({ websiteId }: { websiteId: string }) {
   const isSharePage = pathname.includes('/share/');
 
   return (
-    <Grid gap="3">
+    <Grid gap={{ xs: '2', md: '3' }}>
       <GridRow layout="two" {...rowProps}>
         <Panel>
           <Heading size="2">{formatMessage(labels.pages)}</Heading>

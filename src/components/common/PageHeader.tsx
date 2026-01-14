@@ -1,5 +1,6 @@
 import { Column, Grid, Heading, Icon, Row, Text } from '@umami/react-zen';
 import type { ReactNode } from 'react';
+import { useMobile } from '@/components/hooks';
 import { LinkButton } from './LinkButton';
 
 export function PageHeader({
@@ -21,6 +22,7 @@ export function PageHeader({
   className?: string;
   children?: ReactNode;
 }) {
+  const { isPhone } = useMobile();
   return (
     <Grid
       columns={{ xs: '1fr', md: '1fr 1fr' }}
@@ -45,12 +47,17 @@ export function PageHeader({
           )}
         </Row>
         {description && (
-          <Text color="muted" truncate style={{ maxWidth: 600 }} title={description}>
+          <Text
+            color="muted"
+            truncate
+            style={{ maxWidth: isPhone ? '100%' : 600 }}
+            title={description}
+          >
             {description}
           </Text>
         )}
       </Column>
-      <Row justifyContent="flex-end" alignItems="center">
+      <Row justifyContent="flex-end" alignItems="center" wrap="wrap" gap>
         {children}
       </Row>
     </Grid>

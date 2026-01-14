@@ -1,3 +1,9 @@
+declare global {
+  interface BigInt {
+    toJSON(): number;
+  }
+}
+
 export const PRISMA = 'prisma';
 export const POSTGRESQL = 'postgresql';
 export const CLICKHOUSE = 'clickhouse';

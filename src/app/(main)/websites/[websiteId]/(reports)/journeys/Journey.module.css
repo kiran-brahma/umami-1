@@ -265,3 +265,60 @@
 .column.active .line:not(.active) .segment:before {
   display: none;
 }
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .view {
+    gap: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+  }
+
+  .node {
+    width: min(280px, 90vw);
+    max-width: min(280px, 90vw);
+    height: 80px;
+    max-height: 80px;
+    padding: 12px 16px;
+  }
+
+  .name {
+    max-width: calc(min(280px, 90vw) - 80px);
+    font-size: 14px;
+  }
+
+  .num {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .visitors {
+    font-size: 15px;
+  }
+
+  .dropoff {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .line {
+    left: -40px;
+    width: 40px;
+  }
+
+  .start,
+  .end {
+    width: 20px;
+  }
+
+  .mid {
+    width: 20px;
+  }
+
+  .up .end,
+  .down .end {
+    width: 22px;
+  }
+}

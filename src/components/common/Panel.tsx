@@ -37,8 +37,8 @@ export function Panel({ title, allowFullscreen, style, children, ...props }: Pan
 
   return (
     <Column
-      paddingY="6"
-      paddingX={{ xs: '3', md: '6' }}
+      paddingY={{ xs: '4', md: '6' }}
+      paddingX={{ xs: '2', md: '6' }}
       border
       borderRadius="3"
       backgroundColor
